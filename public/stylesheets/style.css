@@ -1,0 +1,93 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+.ut-list-job{
+	list-style: none;
+}
+.ut-list-job li {
+	padding: 4px 0;
+}
+.ic-dot{
+	background: 
+}
+player, #container.player{
+	display: block;
+    width: 100%;
+    height: 100%;
+}
+.row.player{
+	height: 481px;
+    position: relative;
+}
+#player-container{
+	    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.ut-p-chrome-bottom{
+	box-sizing: unset;
+}
+#player-api { 
+  height: 464px;
+  width: 100%;
+}
+.ut-list-cmt{
+      height: 30.4em;
+}
+.ut-ul-cmt{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.ut-ul-cmt li{
+  border: 1px solid #bdbdbd;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+.ut-ul-cmt span{
+  font-weight: bold;
+      margin-right: 8px;
+
+}
+.ut-ul-cmt li:hover{
+  background-color: #f1f1f1; 
+}
+.ut-bafn{
+display: flex;
+    border: 1px solid #d6d6d6;
+    overflow: hidden;
+    height: 124px;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+.ut-bafn img{
+  width: 100%;
+}
+.ut-bafn:hover{
+  border: 1px solid #00B7FF;
+}
+.ut-page-err-a a{
+  display: block
+}
+.ut-time-cov{
+  position: absolute;
+    background: #0000006e;
+    padding: 3px 6px;
+    font-size: 13px;
+    color: #fff;
+    bottom: 5px;
+    right: 5px;
+}
+.ut-prc i:nth-of-type(even) {
+    margin-left: 10px;
+}

@@ -1,0 +1,133 @@
+<% var host = 'http://localhost:3000'; %>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML5 player</title>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/Player.css' />
+    <script src="/javascripts/jquery-3.6.0.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://kit.fontawesome.com/4f8c84b25e.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container align-middle">
+    	<div class="row justify-content-center mt-5">
+    		<h1><a href="<%= host %>" title="">HTML5 player</a></h1>
+    	</div>
+		<div class="row mt-5">
+			<div class="col-xl-8 col-lg-6 col-md-8 mx-auto">
+			    <form id="iSend">
+			    	<div class="input-group mb-3">
+			    		<input id="linkVD" type="text" class="form-control" placeholder="Link youtube" aria-label="Recipient's username" aria-describedby="button-addon2">
+					  	<div class="input-group-append">
+					    <button class="btn btn-primary" type="submit" id="sendN">Submit</button>
+				  	</div>
+				</form>
+			</div>
+		</div>
+		</div>
+		<div class="row">
+			<div class="col-xl-8 col-lg-6 col-md-8 mx-auto">
+				<div class="alert alert-warning" role="alert">
+				  	<strong>Note:</strong> This tool does not work with videos longer than <strong>4 minutes</strong>
+				</div>
+				<div class="alert alert-danger" role="alert" style="display: none">
+				  	<strong>Error:</strong> <span id="messs"></span>
+				</div>
+			</div>
+		</div>
+		<div id="process" class="row" style="display: none">
+			<div class="col-xl-8 col-lg-6 col-md-8 mx-auto">
+				<ul class="ut-list-job">
+					<li class="ut-prc step-1"><i class="far fa-eye"></i> Verifying</li>
+					<li class="ut-prc step-2"><i class="fas fa-music"></i> Getting sound</li>
+					<li class="ut-prc step-3"><i class="fas fa-glasses"></i> Getting video</li>
+					<li class="ut-prc step-4"><i class="far fa-image"></i> Generating thumbnail</li>
+					<li class="ut-prc step-5"><i class="far fa-check-circle"></i> Done!</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row player" <% if(!player.url){ %> style="display: none" <% } %>>
+			<div class="col-xl-9 col-lg-6 col-md-8">
+				<div id="player-api"></div>
+			</div>
+			<div class="ut-comment col-xl-3 px-0 ">
+				<%
+					function T(a, c) {
+				        c = c || a;
+				        var d = Math.floor(a % 60),
+				            e = Math.floor(a / 60 % 60),
+				            g = Math.floor(a / 3600),
+				            h = Math.floor(c / 60 % 60),
+				            j = Math.floor(c / 3600);
+				        if (isNaN(a) || Infinity === a) g = e = d = "0";
+				        g = 0 < g || 0 < j ? g + ":" : "";
+				        return g + (((g || 10 <= h) && 10 > e ? "0" + e : e) + ":") + (10 > d ? "0" + d : d)
+				    }
+
+				%>
+				<div class="ut-list-cmt">
+					<ul class="ut-ul-cmt">
+						<% comment.forEach((value, index) => { %>
+						<li data-duration="<%= value.time %>"><span><%= T(value.time)%></span><%= value.content %></li>
+						<% }) %>
+					</ul>
+				</div>
+				<div class="ut-input-cmt">
+					<div class="input-group mb-3">
+						<form id="iSendMess">
+							<div class="input-group mb-3">
+								<input id="boxmess" type="text" name="" placeholder="Text something here..." class="form-control">
+								<div class="input-group-append">
+							    	<button class="btn btn-primary" type="submit">Gửi</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<% if(data) { %>
+		<div class="row mt-5">
+		   	<h2>Demo</h2>
+		</div>
+		<div class="row mt-2">
+			<%
+				data.forEach((value, index) => { 
+					if(player.url == value.url) return; 
+
+			%>
+			<div class="col-xl-3">
+				<a class="ut-bafn" href="/<%= value.url%>" title="<%= value.name %>">
+					<img src="/images/thumbnails/<%= value.url%>/10.png" alt="">
+					<span class="ut-time-cov"><%= T(value.duration)%></span>
+				</a>
+				<h6 class="mt-2">
+					<%= value.name %>
+				</h6>
+			</div>
+			<% }) %>
+		</div>
+		<% } %>
+	</div>
+  </body>
+
+  <script>
+  	var dataVideo = {
+  		<% if(Object.keys(player).length > 0)  {%>
+        stt: "success",
+        quality: "1080",
+        title: "<%= player.name%>",
+        error: false,
+        id: '<%= player.url %>',
+        src: '/videos/<%= player.url %>.mp4',
+        sound: '/sound/<%= player.url %>.mp3',
+        hover: true
+        <% } %>
+    };
+  </script>
+
+  <script src="/javascripts/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/javascripts/html5player.js" type="text/javascript" charset="utf-8"></script>
+</html>
